@@ -281,14 +281,14 @@ void Game::UpdateCamera(const GameTimer& gt)
 void Game::AnimateMaterials(const GameTimer& gt)
 {
 	// Scroll the water material texture coordinates.
-	auto waterMat = mMaterials["water"].get();
+	auto desertMat = mMaterials["desert"].get();
 
-	float& tu = waterMat->MatTransform(3, 0);
-	float& tv = waterMat->MatTransform(3, 0);
+	float& tu = desertMat->MatTransform(3, 0);
+	float& tv = desertMat->MatTransform(3, 1);
 
 
-	tu += -0.1f * gt.DeltaTime(); //change water flow direction
-	tv += 0.0f * gt.DeltaTime();
+	tu += 0.1f * gt.DeltaTime(); //change water flow direction
+	tv += -1 * gt.DeltaTime();
 
 	if (tu >= 1.0f)
 		tu -= 1.0f;
@@ -296,13 +296,13 @@ void Game::AnimateMaterials(const GameTimer& gt)
 	if (tv >= 1.0f)
 		tv -= 1.0f;
 
-	waterMat->MatTransform(3, 0) = tu;
-	waterMat->MatTransform(3, 1) = tv;
+	desertMat->MatTransform(3, 0) = tu;
+	desertMat->MatTransform(3, 1) = tv;
 
 
 
 	// Material has changed, so need to update cbuffer.
-	waterMat->NumFramesDirty = gNumFrameResources;
+	desertMat->NumFramesDirty = gNumFrameResources;
 
 }
 
@@ -469,12 +469,12 @@ void Game::LoadTextures()
 {
 
 
-	auto waterTex = std::make_unique<Texture>();
-	waterTex->Name = "waterTex";
-	waterTex->Filename = L"../../Textures/water.dds";
+	auto desertTex = std::make_unique<Texture>();
+	desertTex->Name = "desertTex";
+	desertTex->Filename = L"../../Textures/desert.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), waterTex->Filename.c_str(),
-		waterTex->Resource, waterTex->UploadHeap));
+		mCommandList.Get(), desertTex->Filename.c_str(),
+		desertTex->Resource, desertTex->UploadHeap));
 
 	auto eagleTex = std::make_unique<Texture>();
 	eagleTex->Name = "eagleTex";
@@ -491,7 +491,7 @@ void Game::LoadTextures()
 		raptorTex->Resource, raptorTex->UploadHeap));
 
 
-	mTextures[waterTex->Name] = std::move(waterTex);
+	mTextures[desertTex->Name] = std::move(desertTex);
 	mTextures[eagleTex->Name] = std::move(eagleTex);
 	mTextures[raptorTex->Name] = std::move(raptorTex);
 
@@ -553,18 +553,18 @@ void Game::BuildDescriptorHeaps()
 	//
 	CD3DX12_CPU_DESCRIPTOR_HANDLE hDescriptor(mSrvDescriptorHeap->GetCPUDescriptorHandleForHeapStart());
 
-	auto waterTex = mTextures["waterTex"]->Resource;
+	auto desertTex = mTextures["desertTex"]->Resource;
 	auto eagleTex = mTextures["eagleTex"]->Resource;
 	auto raptorTex = mTextures["raptorTex"]->Resource;
 
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.Format = waterTex->GetDesc().Format; //<------------------------------------Not sure about this part
+	srvDesc.Format = desertTex->GetDesc().Format;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MostDetailedMip = 0;
 	srvDesc.Texture2D.MipLevels = -1;
-	md3dDevice->CreateShaderResourceView(waterTex.Get(), &srvDesc, hDescriptor);
+	md3dDevice->CreateShaderResourceView(desertTex.Get(), &srvDesc, hDescriptor);
 
 	// next descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
@@ -1208,7 +1208,7 @@ void Game::BuildWavesGeometry()
 	UINT ibByteSize = (UINT)indices.size() * sizeof(std::uint16_t);
 
 	auto geo = std::make_unique<MeshGeometry>();
-	geo->Name = "waterGeo";
+	geo->Name = "desertGeo";
 
 	// Set dynamically.
 	geo->VertexBufferCPU = nullptr;
@@ -1232,7 +1232,7 @@ void Game::BuildWavesGeometry()
 
 	geo->DrawArgs["grid"] = submesh;
 
-	mGeometries["waterGeo"] = std::move(geo);
+	mGeometries["desertGeo"] = std::move(geo);
 }
 
 
@@ -1351,14 +1351,14 @@ void Game::BuildMaterials()
 	UINT MatCBIndex = 0;
 	UINT DiffuseSrvHeapIndex = 0;
 
-	auto water = std::make_unique<Material>();
-	water->Name = "water";
-	water->MatCBIndex = MatCBIndex++;
-	water->DiffuseSrvHeapIndex = DiffuseSrvHeapIndex++;
-	water->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	water->FresnelR0 = XMFLOAT3(0.2f, 0.2f, 0.2f);
-	water->Roughness = 0.0f;
-	mMaterials["water"] = std::move(water);
+	auto desert = std::make_unique<Material>();
+	desert->Name = "desert";
+	desert->MatCBIndex = MatCBIndex++;
+	desert->DiffuseSrvHeapIndex = DiffuseSrvHeapIndex++;
+	desert->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	desert->FresnelR0 = XMFLOAT3(0.2f, 0.2f, 0.2f);
+	desert->Roughness = 0.0f;
+	mMaterials["desert"] = std::move(desert);
 
 	auto eagle = std::make_unique<Material>();
 	eagle->Name = "eagle";
@@ -1395,10 +1395,11 @@ void Game::BuildRenderItems()
 
 	auto wavesRitem = std::make_unique<RenderItem>();
 	wavesRitem->World = MathHelper::Identity4x4();
+	//XMStoreFloat4x4(&wavesRitem->TexTransform, XMMatrixScaling(10.0f, 10.0f, 10.0) * XMMatrixTranslation(500.0f, 100.0f, 800.0f));
 	XMStoreFloat4x4(&wavesRitem->World, XMMatrixScaling(10.0f, 10.0f, 10.0f) * XMMatrixRotationX(XM_PI * -0.5f) * XMMatrixTranslation(0.0f, 0.0f, 800.0f));
 	wavesRitem->ObjCBIndex = objCBIndex++;
-	wavesRitem->Mat = mMaterials["water"].get();
-	wavesRitem->Geo = mGeometries["waterGeo"].get();
+	wavesRitem->Mat = mMaterials["desert"].get();
+	wavesRitem->Geo = mGeometries["desertGeo"].get();
 	wavesRitem->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	wavesRitem->IndexCount = wavesRitem->Geo->DrawArgs["grid"].IndexCount;
 	wavesRitem->StartIndexLocation = wavesRitem->Geo->DrawArgs["grid"].StartIndexLocation;
