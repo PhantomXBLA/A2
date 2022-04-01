@@ -1,0 +1,53 @@
+\hypertarget{_world_8h_source}{}\doxysection{World.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{comment}{//\#include "{}Game.h"{}}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}Aircraft.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}FrameResource.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}CommandQueue.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Command.h"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{class_world}{World}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10 \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     \mbox{\hyperlink{class_world}{World}}(\mbox{\hyperlink{class_game}{Game}}* game);}
+\DoxyCodeLine{12     \textcolor{keywordtype}{void}                                update(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{13     \textcolor{keywordtype}{void}                                drawOcean(\mbox{\hyperlink{class_game}{Game}}* gameRef);}
+\DoxyCodeLine{14     \textcolor{keywordtype}{void}                                buildScene();}
+\DoxyCodeLine{15     \textcolor{keywordtype}{void}                                draw();}
+\DoxyCodeLine{16     \mbox{\hyperlink{class_command_queue}{CommandQueue}}\&                       getCommandQueue();}
+\DoxyCodeLine{17     \mbox{\hyperlink{class_command_queue}{CommandQueue}}                        mCommandQueue;}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{private}:}
+\DoxyCodeLine{21     \textcolor{keywordtype}{void}                                loadTextures();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#pragma region step 3}}
+\DoxyCodeLine{26     \textcolor{keywordtype}{void}                                adaptPlayerPosition();}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void}                                adaptPlayerVelocity();}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#pragma endregion}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{private}:}
+\DoxyCodeLine{32     \textcolor{keyword}{enum} Layer}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         Background,}
+\DoxyCodeLine{35         Air,}
+\DoxyCodeLine{36         LayerCount}
+\DoxyCodeLine{37     \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{keyword}{private}:}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \mbox{\hyperlink{class_scene_node}{SceneNode}}*                         mSceneGraph;}
+\DoxyCodeLine{43     std::array<SceneNode*, LayerCount>  mSceneLayers;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{comment}{//sf::FloatRect                     mWorldBounds;}}
+\DoxyCodeLine{46     \mbox{\hyperlink{class_aircraft}{Aircraft}}* mPlayerAircraft;}
+\DoxyCodeLine{47     \mbox{\hyperlink{class_game}{Game}}* mGame;}
+\DoxyCodeLine{48 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,157 @@
+\hypertarget{_game_8h_source}{}\doxysection{Game.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{comment}{//\#include "{}SceneNode.h"{}}}
+\DoxyCodeLine{5 \textcolor{comment}{//\#include "{}Aircraft.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Waves.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}World.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}Player.h"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{enum class} RenderLayer : int}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16     Opaque = 0,}
+\DoxyCodeLine{17     Transparent,}
+\DoxyCodeLine{18     AlphaTested,}
+\DoxyCodeLine{19     AlphaTestedTreeSprites,}
+\DoxyCodeLine{20     Count}
+\DoxyCodeLine{21 \};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{class_game}{Game}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_d3_d_app}{D3DApp}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{30     \mbox{\hyperlink{class_game_a3f68a62a1fe1ca8dcd1deb054b384cef}{Game}}(HINSTANCE hInstance);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{33     \mbox{\hyperlink{class_game_a3f68a62a1fe1ca8dcd1deb054b384cef}{Game}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_game}{Game}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \mbox{\hyperlink{class_game}{Game}}\& operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_game}{Game}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{36     }
+\DoxyCodeLine{39     \mbox{\hyperlink{class_game_ae3d112ca6e0e55150d2fdbc704474530}{\string~Game}}();}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{45     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_game_a16354d232327f6c21319713bf6983674}{Initialize}}()\textcolor{keyword}{override};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keyword}{private}:}
+\DoxyCodeLine{48     \textcolor{comment}{//enum Layer}}
+\DoxyCodeLine{49     \textcolor{comment}{//\{}}
+\DoxyCodeLine{50     \textcolor{comment}{//  Background,}}
+\DoxyCodeLine{51     \textcolor{comment}{//  Air,}}
+\DoxyCodeLine{52     \textcolor{comment}{//  LayerCount}}
+\DoxyCodeLine{53     \textcolor{comment}{//\};}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{keyword}{private}:}
+\DoxyCodeLine{56     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} OnResize()\textcolor{keyword}{override};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{62     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} Update(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt)\textcolor{keyword}{override};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{68     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} Draw(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt)\textcolor{keyword}{override};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} OnMouseDown(WPARAM btnState, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y)\textcolor{keyword}{override};}
+\DoxyCodeLine{71     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} OnMouseUp(WPARAM btnState, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y)\textcolor{keyword}{override};}
+\DoxyCodeLine{72     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} OnMouseMove(WPARAM btnState, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y)\textcolor{keyword}{override};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{comment}{//Aircraft* mPlayerAircraft;}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     \textcolor{keywordtype}{void} OnKeyboardInput(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} UpdateCamera(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{78     \textcolor{keywordtype}{void} AnimateMaterials(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{79     \textcolor{keywordtype}{void} UpdateObjectCBs(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} UpdateMaterialCBs(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} UpdateMainPassCB(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{82     \textcolor{keywordtype}{void} UpdateWaves(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{88     \textcolor{keywordtype}{void} LoadTextures();}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{void} BuildRootSignature();}
+\DoxyCodeLine{91     }
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} BuildDescriptorHeaps();}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{102     \textcolor{keywordtype}{void} BuildShadersAndInputLayout();}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{keywordtype}{void} BuildLandGeometry();}
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} BuildWavesGeometry();}
+\DoxyCodeLine{106     \textcolor{keywordtype}{void} BuildBoxGeometry();}
+\DoxyCodeLine{107     \textcolor{keywordtype}{void} BuildSphereGeometry();}
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} BuildCylinderGeometry();}
+\DoxyCodeLine{109     \textcolor{keywordtype}{void} BuildTorusGeometry();}
+\DoxyCodeLine{110     \textcolor{keywordtype}{void} BuildWedgeGeometry();}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \textcolor{keywordtype}{void} BuildPyramidGeometry();}
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} BuildConeGeometry();}
+\DoxyCodeLine{114     \textcolor{keywordtype}{void} BuildDiamondGeometry();}
+\DoxyCodeLine{115     \textcolor{keywordtype}{void} BuildTriPrismGeometry();}
+\DoxyCodeLine{116     \textcolor{keywordtype}{void} BuildTreeSpritesGeometry();}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{void} BuildShapeGeometry();}
+\DoxyCodeLine{119     \textcolor{keywordtype}{void} BuildPSOs();}
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} BuildFrameResources();}
+\DoxyCodeLine{121     \textcolor{keywordtype}{void} BuildMaterials();}
+\DoxyCodeLine{122     \textcolor{keywordtype}{void} BuildRenderItems();}
+\DoxyCodeLine{123     \textcolor{keywordtype}{void} DrawRenderItems(ID3D12GraphicsCommandList* cmdList, \textcolor{keyword}{const} std::vector<RenderItem*>\& ritems);}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     std::array<const CD3DX12\_STATIC\_SAMPLER\_DESC, 6> GetStaticSamplers();}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \mbox{\hyperlink{class_world}{World}}                  world;}
+\DoxyCodeLine{128     \mbox{\hyperlink{class_player}{Player}}                    mPlayer;}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{keywordtype}{void}                    processEvents(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132     \textcolor{comment}{//SceneNode sceneNode;}}
+\DoxyCodeLine{133     \textcolor{comment}{//std::array<SceneNode*, LayerCount>    mSceneLayers;}}
+\DoxyCodeLine{134     \textcolor{comment}{//float GetHillsHeight(float x, float z)const;}}
+\DoxyCodeLine{135     \textcolor{comment}{//XMFLOAT3 GetHillsNormal(float x, float z)const;}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{keyword}{public}:}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139     std::vector<std::unique\_ptr<FrameResource>> mFrameResources;}
+\DoxyCodeLine{140     \mbox{\hyperlink{struct_frame_resource}{FrameResource}}* mCurrFrameResource = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{141     \textcolor{keywordtype}{int} mCurrFrameResourceIndex = 0;}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     UINT mCbvSrvDescriptorSize = 0;}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     ComPtr<ID3D12RootSignature> mRootSignature = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149     std::unordered\_map<std::string, std::unique\_ptr<MeshGeometry>> mGeometries;}
+\DoxyCodeLine{150     std::unordered\_map<std::string, std::unique\_ptr<Material>> mMaterials;}
+\DoxyCodeLine{151     std::unordered\_map<std::string, std::unique\_ptr<Texture>> mTextures;}
+\DoxyCodeLine{152     std::unordered\_map<std::string, ComPtr<ID3DBlob>> mShaders;}
+\DoxyCodeLine{153     std::unordered\_map<std::string, ComPtr<ID3D12PipelineState>> mPSOs;}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     std::vector<D3D12\_INPUT\_ELEMENT\_DESC> mInputLayout;}
+\DoxyCodeLine{156     std::vector<D3D12\_INPUT\_ELEMENT\_DESC> mTreeSpriteInputLayout;}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158     \mbox{\hyperlink{struct_render_item}{RenderItem}}* mWavesRitem = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{comment}{// List of all the render items.}}
+\DoxyCodeLine{161     std::vector<std::unique\_ptr<RenderItem>> mAllRitems;}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{comment}{// Render items divided by PSO.}}
+\DoxyCodeLine{164     std::vector<RenderItem*> mRitemLayer[(int)RenderLayer::Count];}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166     std::unique\_ptr<Waves> mWaves;}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168     \mbox{\hyperlink{struct_pass_constants}{PassConstants}} mMainPassCB;}
+\DoxyCodeLine{169     \mbox{\hyperlink{struct_pass_constants}{PassConstants}} mSecondaryPassCB;}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171     XMFLOAT3 mEyePos = \{ 0.0f, 0.0f, 0.0f \};}
+\DoxyCodeLine{172     XMFLOAT4X4 mView = MathHelper::Identity4x4();}
+\DoxyCodeLine{173     XMFLOAT4X4 mProj = MathHelper::Identity4x4();}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175     \textcolor{keywordtype}{float} mTheta = 1.5f * XM\_PI;}
+\DoxyCodeLine{176     \textcolor{keywordtype}{float} mPhi = XM\_PIDIV2 -\/ 0.1f;}
+\DoxyCodeLine{177     \textcolor{keywordtype}{float} mRadius = 50.0f;}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179     POINT mLastMousePos;}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 \};}
+\DoxyCodeLine{182 }
+
+\end{DoxyCode}

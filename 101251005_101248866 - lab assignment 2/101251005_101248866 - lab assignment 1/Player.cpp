@@ -1,9 +1,7 @@
 #pragma region step 2
 #include "Aircraft.h"
 #include "Player.h"
-//#include "Command.h"
 #include "CommandQueue.h"
-
 #include <map>
 #include <string>
 #include <algorithm>
